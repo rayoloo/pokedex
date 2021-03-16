@@ -104,7 +104,7 @@ export default class List extends React.Component {
             key={this.state.id}
             loading={this.state.loading}
             >
-                <Card.Meta title={<h3>{res}</h3>}></Card.Meta>
+                <Card.Meta title={<h3>{res} #{this.state.id}</h3>}></Card.Meta>
             </Card>
         </Popover>
     )
