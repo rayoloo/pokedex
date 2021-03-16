@@ -54,7 +54,6 @@ export default class List extends React.Component {
 
     }
 
-
     render(){
         const imageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
         const myString = this.props.name

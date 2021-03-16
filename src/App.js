@@ -4,7 +4,6 @@ import 'antd/dist/antd.css';
 import './App.css'
 import List from "./List"
 
-
 function App(){
   const [Pokedex, setPokedex] = useState([])
   var i = 1, clickID, focus=false;
