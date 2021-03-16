@@ -99,7 +99,7 @@ export default class List extends React.Component {
         >
             <Card
             hoverable
-            style={{width:310, opacity:0.95, backgroundColor:colors[this.state.colour]}}
+            style={{width:317, opacity:0.95, backgroundColor:colors[this.state.colour]}}
             cover={<img src={imageURL + this.state.id +".png"} alt="failed" style={{padding:"10px"}}></img> }
             key={this.state.id}
             loading={this.state.loading}

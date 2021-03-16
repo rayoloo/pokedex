@@ -6,7 +6,7 @@ import List from "./List"
 
 function App(){
   const [Pokedex, setPokedex] = useState([])
-  var i = 1, clickID, focus=false;
+  var i = 1
   
   const getPokemons = async () =>{
     const url = "https://pokeapi.co/api/v2/pokemon?limit=898"
@@ -37,11 +37,11 @@ function App(){
     )
   })
   
-  const {Header, Content} = Layout
+  const {Header} = Layout
   return (
     <div>
       <Header ><h1 className="App">Pokedex</h1></Header>
-      <Row gutter={8}>
+      <Row>
         {dexComponent}
       </Row>
     </div>
