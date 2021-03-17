@@ -83,7 +83,7 @@ export default class List extends React.Component {
 
         const content = (
             <div>
-                <h4>Pokemon ID: {capitalize(this.state.name)}</h4>
+                <h4>Pokemon ID: {capitalize(this.state.id)}</h4>
                 <h4>Pokemon Type(s): {capitalize(this.state.type)}</h4>
                 <h4>Pokemon Abilities: {capitalize(this.state.abilities)}</h4>
                 <h4>Pokemon Height : {this.state.height * 10} cm // {(10 * this.state.height / 30.48).toFixed(2)} ft.</h4>
