@@ -34,14 +34,18 @@ export default class List extends React.Component {
                 }) 
             }
             var i, ab
-            for(i = 0;i <response.abilities.length;i++){
-                if(i === (response.abilities.length-1)){
-                    ab += response.abilities[i].ability.name
-                }
-                else{
-                    ab = response.abilities[i].ability.name + ", "
+            if (response.abilities.length > 1){
+                for(i = 0;i <response.abilities.length;i++){
+                    if(i === (response.abilities.length-1)){
+                        ab += response.abilities[i].ability.name
+                    }
+                    else{
+                        ab = response.abilities[i].ability.name + ", "
+                    }
                 }
             }
+            else
+                ab = response.abilities[0].ability.name
             this.setState({
                 name:response.name,
                 colour:response.types[0].type.name,
@@ -56,8 +60,6 @@ export default class List extends React.Component {
 
     render(){
         const imageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
-        const myString = this.props.name
-        const res = myString.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
         const colors = {
             fire: '#EE8130',
             grass: '#7AC74C',
@@ -81,9 +83,9 @@ export default class List extends React.Component {
 
         const content = (
             <div>
-                <h4>Pokemon ID: {this.state.id}</h4>
-                <h4>Pokemon Type(s): {this.state.type}</h4>
-                <h4>Pokemon Abilities: {this.state.abilities}</h4>
+                <h4>Pokemon ID: {capitalize(this.state.name)}</h4>
+                <h4>Pokemon Type(s): {capitalize(this.state.type)}</h4>
+                <h4>Pokemon Abilities: {capitalize(this.state.abilities)}</h4>
                 <h4>Pokemon Height : {this.state.height * 10} cm // {(10 * this.state.height / 30.48).toFixed(2)} ft.</h4>
                 <h4>Pokemon Weight : {this.state.weight / 10} kg // {(this.state.weight*2.2046 / 10).toFixed(2)}lbs</h4>
             </div>
@@ -98,13 +100,14 @@ export default class List extends React.Component {
             content={content} trigger="click" placement="bottom" title={<h1>{capitalize(this.state.name)}</h1>} 
         >
             <Card
+            bordered
             hoverable
-            style={{width:317, opacity:0.95, backgroundColor:colors[this.state.colour]}}
-            cover={<img src={imageURL + this.state.id +".png"} alt="failed" style={{padding:"10px"}}></img> }
+            style={{width:"250px", textAlign:"center", opacity:0.95, backgroundColor:colors[this.state.colour]}}
+            cover={<img src={imageURL + this.state.id +".png"} alt="failed to fetch" style={{padding:"10px"}}></img> }
             key={this.state.id}
             loading={this.state.loading}
             >
-                <Card.Meta title={<h3>{res} #{this.state.id}</h3>}></Card.Meta>
+                <Card.Meta title={<h3>{capitalize(this.state.name)} #{this.state.id}</h3>}></Card.Meta>
             </Card>
         </Popover>
     )
