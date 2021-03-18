@@ -161,29 +161,3 @@ function App(){
 }
 
 export default App;
-/*
-<Popover
-            content={
-            <div>
-              <h4>Pokemon ID: {capitalize(this.state.name)}</h4>
-              <h4>Pokemon Type(s): {capitalize(this.state.type)}</h4>
-              <h4>Pokemon Abilities: {capitalize(this.state.abilities)}</h4>
-              <h4>Pokemon Height : {this.state.height * 10} cm // {(10 * this.state.height / 30.48).toFixed(2)} ft.</h4>
-              <h4>Pokemon Weight : {this.state.weight / 10} kg // {(this.state.weight*2.2046 / 10).toFixed(2)}lbs</h4>
-          </div>} 
-            trigger="click" 
-            placement="bottom" 
-            title={<h1>{capitalize(this.state.name)}</h1>} 
-        >
-            <Card
-            bordered
-            hoverable
-            style={{width:"250px", textAlign:"center", opacity:0.95, backgroundColor:colors[this.state.colour]}}
-            cover={<img src={imageURL + this.state.id +".png"} alt="failed to fetch" style={{padding:"10px"}}></img> }
-            key={this.state.id}
-            loading={this.state.loading}
-            >
-                <Card.Meta title={<h3>{capitalize(this.state.name)} #{this.state.id}</h3>}></Card.Meta>
-            </Card>
-        </Popover>
-*/
