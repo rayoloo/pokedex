@@ -107,10 +107,9 @@ export default class List extends React.Component {
             key={this.state.id}
             loading={this.state.loading}
             >
-                <Card.Meta title={<h3>{capitalize(this.state.name)} #{this.state.id}</h3>}></Card.Meta>
+                <Card.Meta title={<h3>{capitalize(this.state.name)}</h3>}></Card.Meta>
             </Card>
         </Popover>
     )
     }
 }
-
