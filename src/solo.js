@@ -1,82 +1,104 @@
 import React, { useState } from "react";
+import {Popover,Card} from "antd"
 import './App.css'
 
-function Solo(props) {
+function Solo() {
     const [pokemon, setPokemon] = useState("pikachu");
     const [pokemonData, setPokemonData] = useState([]);
-    //const [pokemonType, setPokemonType] = useState("");
-
-    function handleChange(e){
-        setPokemon(e.target.value.toLowerCase())
+    const imageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
+    const colors = {
+        fire: '#EE8130',
+        grass: '#7AC74C',
+        electric: '#F7D02C',
+        water: '#6390F0',
+        ground: '#E2BF65',
+        rock: '#B6A136',
+        poison: '#A33EA1',
+        bug: '#A6B91A',
+        dragon: '#6F35FC',
+        psychic: '#F95587',
+        flying: '#A98FF3',
+        fighting: '#C22E28',
+        normal: '#A8A77A',
+        ice: '#96D9D6',
+        ghost: '#735797',
+        dark: '#705746',
+        steel: "#B7B7CE",
+        fairy: "#D685AD"
     }
+    var hidden = true, type1
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        getPokemon()
-    }
-
-    const getPokemon = () => {
-        var url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`
+    const getPokemon = async () => {
         try {
-            if(props > 0)
-                url = `https://pokeapi.co/api/v2/pokemon/${props}`
-            fetch(url)
+            const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`
+            await fetch(url)
             .then(response => response.json())
-            .then(data =>{
-                console.log(data)
-                setPokemonData(data)
-                console.log("filled",pokemonData)
-            })
-        } catch (e) {
+            .then(response =>{
+            type1 = response.types[0].type.name
+            setPokemonData(response)   
+            console.log("searched: ",response)
+        })
+        } 
+        catch (e) {
             console.log(e)
         }
     }
 
-    const renderPokemon = () =>{
-        return(
-            <div className="container">
-                <img src={pokemonData.sprites["other"]["official-artwork"]} alt="failed images" />
-                <div className="divTable">
-                    <div className="divTableBody">
-                        <div className="divTableRow">
-                            <div className="divTableCell">Pokemon</div>
-                            <div className="divTableCell">{pokemonData.name}</div>
-                        </div>
-                        <div className="divTableRow">
-                            <div className="divTableCell">Type</div>
-                            <div className="divTableCell">{pokemonData.types}</div>
-                        </div>
-                        <div className="divTableRow">
-                            <div className="divTableCell">Height (cm)</div>
-                            <div className="divTableCell">{Math.round(pokemonData.height * 10)}"</div>
-                        </div>
-                        <div className="divTableRow">
-                            <div className="divTableCell">Weight (kg)</div>
-                            <div className="divTableCell">{Math.round(pokemonData.weight / 10)} lbs</div>
-                        </div>
-                        <div className="divTableRow">
-                            <div className="divTableCell">Abilities</div>
-                            <div className="divTableCell">{pokemonData.abilities.ability}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
+    const handleChange = (e) => {
+        setPokemon(e.target.value.toLowerCase())
+    }
+    
+    const handleSubmit = (e) => {
+        hidden = false
+        e.preventDefault()
+        getPokemon()
     }
 
     return (
         <div className="App">
         <form onSubmit={handleSubmit}>
-            <label>
-            <input
-                type="text"
-                onChange={handleChange}
-                placeholder="Pokemon Name or ID"
-            />
-            </label>
-        </form>
-        {renderPokemon}
-        </div>
+        <label>
+          <input
+            type="text"
+            onChange={handleChange}
+            placeholder="pokemon name or ID"
+          />
+        </label>
+      </form>
+      <div style={hidden ? { display:"block" } : {display:"none"}}>
+        <Row justify="center">
+          <Col>
+          <Popover
+            trigger="click" 
+            placement="bottom" 
+            title={<h1>{pokemonData.name}</h1>} 
+            content={
+            <div>
+              <h4>Pokemon ID: {pokemonData.id}</h4>
+                <h4>Pokemon Type(s): {}</h4>
+                <h4>Pokemon Abilities: {pokemonData.abilities}</h4>
+                <h4>Pokemon Height : {pokemonData.height * 10} cm // {(10 * pokemonData.height / 30.48).toFixed(2)} ft.</h4>
+                <h4>Pokemon Weight : {pokemonData.weight / 10} kg // {(pokemonData.weight*2.2046 / 10).toFixed(2)}lbs</h4>
+            </div>
+            }
+            
+        >
+            <Card
+            bordered
+            hoverable
+            style={{width:"250px", textAlign:"center", opacity:0.95, backgroundColor:colors[type1]}}
+            cover={<img src={imageURL + pokemonData.id +".png"} alt="failed to fetch" style={{padding:"10px"}}></img> }
+            key={pokemonData.id}
+            >
+                <Card.Meta title={<h3>{pokemonData.name} #{pokemonData.id}</h3>}></Card.Meta>
+            </Card>
+        </Popover>
+          </Col>
+        </Row>
+      
+      </div>
+      <hr/>
+    </div>
     )
 }
 
