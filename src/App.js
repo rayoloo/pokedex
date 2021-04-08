@@ -96,7 +96,7 @@ function App(){
   return (
     <div>
       <h1 className="PokedexTitle">Pokédex</h1>
-      <div style={{margin: "auto", width:"14%"}}>
+      <div style={{margin: "0 auto", width: "50%",textAlign:"center"}}>
       <form onSubmit={handleSubmit}>
         <label>
           <input
