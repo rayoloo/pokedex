@@ -1,6 +1,6 @@
 import React from 'react'
 import {Card, Popover} from "antd"
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.css'
 
 export default class List extends React.Component {
     constructor(props){
@@ -13,7 +13,13 @@ export default class List extends React.Component {
             abilities:"",
             height:0,
             weight:0, 
-            loading: true
+            loading: true,
+            hp:0,
+            attack:0,
+            defense:0,
+            spatk:0,
+            spdef:0,
+            speed:0
         }
     }
 
@@ -52,7 +58,13 @@ export default class List extends React.Component {
                 abilities:ab,
                 height:response.height,
                 weight:response.weight,
-                loading: false
+                loading: false,
+                hp:(response.stats[0].base_stat/255)*100,
+                attack:(response.stats[1].base_stat/255)*100,
+                defense:(response.stats[2].base_stat/255)*100,
+                spatk:(response.stats[3].base_stat/255)*100,
+                spdef:(response.stats[4].base_stat/255)*100,
+                speed:(response.stats[5].base_stat/255)*100
             }) 
         })
 
@@ -88,6 +100,44 @@ export default class List extends React.Component {
                 <h4>Pokemon Abilities: {capitalize(this.state.abilities)}</h4>
                 <h4>Pokemon Height : {this.state.height * 10} cm // {(10 * this.state.height / 30.48).toFixed(2)} ft.</h4>
                 <h4>Pokemon Weight : {this.state.weight / 10} kg // {(this.state.weight*2.2046 / 10).toFixed(2)}lbs</h4>
+                <div style={{backgroundColor:"#989898"}}>
+                    <div role="progressbar" style={{width:this.state.hp+"%" , backgroundColor:colors[this.state.colour]}} >
+                        HP:{Math.floor((this.state.hp*255)/100)}
+                    </div>                
+                </div>
+                <br></br>
+                <div style={{backgroundColor:"#989898"}}>
+                    <div role="progressbar" style={{width:this.state.attack+"%" , backgroundColor:colors[this.state.colour]}} >
+                        ATK: {Math.floor((this.state.attack*255)/100)}
+                    </div>
+                </div>
+                <br></br>
+                <div style={{backgroundColor:"#989898"}}>
+                    <div role="progressbar" style={{width:this.state.defense+"%" , backgroundColor:colors[this.state.colour]}} >
+                        DEF: {Math.floor((this.state.defense*255)/100)}
+                    </div>
+                </div>
+                <br></br>
+                <div style={{backgroundColor:"#989898"}}>
+                    <div role="progressbar" style={{width:this.state.spatk+"%" , backgroundColor:colors[this.state.colour]}} >
+                        SpAtk: {Math.floor((this.state.spatk*255)/100)}
+                    </div>
+                </div>
+                <br></br>
+                <div style={{backgroundColor:"#989898"}}>
+                    <div role="progressbar" style={{width:this.state.spdef+"%" , backgroundColor:colors[this.state.colour]}} >
+                        SpDef: {Math.floor((this.state.spdef*255)/100)}
+                    </div>
+                </div>
+                <br></br>
+                <div style={{backgroundColor:"#989898"}}>
+                    <div role="progressbar" style={{width:this.state.speed+"%" , backgroundColor:colors[this.state.colour]}} >
+                        Spd: {Math.floor((this.state.speed*255)/100)}
+                    </div>
+                </div>
+                
+            
+            
             </div>
         )
 

@@ -1,13 +1,6 @@
-.App {
+.PokedexTitle {
     text-align: center;
     color: aliceblue;
-    font-size: xx-large;
-  }
-  
-  input {
-    box-sizing: border-box;
-    font-size: 2rem;
-    padding: 1rem;
-    display: block;
-    margin: 2rem auto;
+    font-size: 56px;
+    background-color: rgb(4, 9, 68);
   }

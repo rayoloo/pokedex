@@ -1,8 +1,9 @@
-import React, { useEffect, useState} from "react"
-import {Row, Col, Layout, Popover,Card} from "antd"
+import React, {useState} from "react"
+import {Row, Col, Popover,Card} from "antd"
 import 'antd/dist/antd.css';
 import './App.css'
 import List from "./List"
+const pokeData = require('./pokeData.json')
 
 function App(){
   const [pokemon, setPokemon] = useState("pikachu");
@@ -10,7 +11,7 @@ function App(){
   const [pokemontype1, setPokemonType] = useState("");
   const [pokemontypes, setPokemonTypes] = useState("");
   const [pokemonAB, setPokemonAB] = useState("");
-  const [Pokedex, setPokedex] = useState([])
+  const [Pokedex] = useState(pokeData.results)
   var i = 1
   const imageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
   const colors = {
@@ -33,18 +34,7 @@ function App(){
     steel: "#B7B7CE",
     fairy: "#D685AD"
 }
-
-  
-  const getPokemons = async () =>{
-    const url = "https://pokeapi.co/api/v2/pokemon?limit=898"
-    await fetch(url)
-      .then(response => response.json())
-      .then(response =>{
-        console.log("Entire List Fetched", response)
-        setPokedex(response.results)   
-    })
-  }
-
+  //singular pokemon fetch using the search bar
   const getPokemon = async () => {
     try {
       const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`
@@ -78,14 +68,9 @@ function App(){
     } catch (e) {
       console.log(e)
     }
-  };
+  }
 
-  //didMount to fetch all the pokemons
-  useEffect(() => {
-    getPokemons()
-  },[])
-
-  //link component to make card clickable
+  //reading in the 898 length pokemon json file no need for any of the data in it tho
   const dexComponent = Pokedex.map((aPokemon) =>{
     var pid = i
     i++
@@ -100,28 +85,34 @@ function App(){
   
 
   const handleChange = (e) => {
-    setPokemon(e.target.value.toLowerCase());
-  };
-  const handleSubmit = (e) => {
+    setPokemon(e.target.value.toLowerCase())
+  }
+
+  const handleSubmit = (e) => { 
     e.preventDefault();
-    getPokemon();
-  };
+    getPokemon()
+  }
 
-
-
-  const {Header} = Layout
   return (
     <div>
-      <Header ><h1 className="App">Pokedex</h1></Header>
+      <h1 className="PokedexTitle">Pokédex</h1>
+      <div style={{margin: "auto", width:"14%"}}>
       <form onSubmit={handleSubmit}>
         <label>
           <input
+            style={{
+              boxSizing: "border-box",
+              fontSize: "2rem",
+              margin: "auto",
+              textAlign: "center"
+            }} 
             type="text"
             onChange={handleChange}
             placeholder="Pokemon name or ID"
           />
         </label>
       </form>
+      </div>
       <div style={{display: pokemonData.name ? 'block' : 'none' }}>
         <Row justify="center">
           <Col>
@@ -160,4 +151,5 @@ function App(){
   )
 }
 
-export default App;
+export default App
+
