@@ -3,6 +3,7 @@ import {Row, Col, Popover,Card} from "antd"
 import 'antd/dist/antd.css';
 import './App.css'
 import List from "./List"
+import {imageURL, colors} from "./Data"
 const pokeData = require('./pokeData.json')
 
 function App(){
@@ -13,30 +14,9 @@ function App(){
   const [pokemontypes, setPokemonTypes] = useState("")
   const [pokemonAB, setPokemonAB] = useState("")
   const [Pokedex] = useState(pokeData.results)
-  
   var i = 1
-  const imageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
-  const colors = {
-    fire: '#EE8130',
-    grass: '#7AC74C',
-    electric: '#F7D02C',
-    water: '#6390F0',
-    ground: '#E2BF65',
-    rock: '#B6A136',
-    poison: '#A33EA1',
-    bug: '#A6B91A',
-    dragon: '#6F35FC',
-    psychic: '#F95587',
-    flying: '#A98FF3',
-    fighting: '#C22E28',
-    normal: '#A8A77A',
-    ice: '#96D9D6',
-    ghost: '#735797',
-    dark: '#705746',
-    steel: "#B7B7CE",
-    fairy: "#D685AD"
-}
-  //singular pokemon fetch using the search bar
+  
+  //singular pokemon fetch
   const getPokemon = async () => {
     try {
       const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`
@@ -48,36 +28,35 @@ function App(){
           setPokemonTypes(response.types[0].type.name +", "+ response.types[1].type.name)
       }
       else{
-          setPokemonTypes(response.types[0].type.name)
+        setPokemonTypes(response.types[0].type.name)
       }
       var i, ab
       if (response.abilities.length > 1){
-          for(i = 0;i <response.abilities.length;i++){
-              if(i === (response.abilities.length-1)){
-                  ab += response.abilities[i].ability.name
-              }
-              else{
-                  ab = response.abilities[i].ability.name + ", "
-              }
+        for(i = 0;i <response.abilities.length;i++){
+          if(i === (response.abilities.length-1)){
+            ab += response.abilities[i].ability.name
           }
+          else{
+            ab = response.abilities[i].ability.name + ", "
+          }
+        }
       }
       else
           ab = response.abilities[0].ability.name
-
         setPokemonAB(ab)
         setPokemonData(response)   
         console.log("Single Pokemon Fetched: ",response)
-        setPokeStat([ response.stats[0].base_stat,
-                      response.stats[1].base_stat,
-                      response.stats[2].base_stat,
-                      response.stats[3].base_stat,
-                      response.stats[4].base_stat,
-                      response.stats[5].base_stat])
-    
-    
-    
+        setPokeStat([ 
+          response.stats[0].base_stat,
+          response.stats[1].base_stat,
+          response.stats[2].base_stat,
+          response.stats[3].base_stat,
+          response.stats[4].base_stat,
+          response.stats[5].base_stat
+        ])
       })
-    } catch (e) {
+    }
+    catch (e) {
       console.log(e)
     }
   }
@@ -141,31 +120,31 @@ function App(){
                     HP:{pokeStat[0]}
                     </div>                
                 </div>
-                <br></br>
+                <br/>
                 <div style={{backgroundColor:"#989898"}}>
                     <div role="progressbar" style={{width:100*(pokeStat[1]/255)+"%" , backgroundColor:colors[pokemontype1]}} >
                         ATK: {pokeStat[1]}
                     </div>
                 </div>
-                <br></br>
+                <br/>
                 <div style={{backgroundColor:"#989898"}}>
                     <div role="progressbar" style={{width:100*(pokeStat[2]/255)+"%" , backgroundColor:colors[pokemontype1]}} >
                         DEF: {pokeStat[2]}
                     </div>
                 </div>
-                <br></br>
+                <br/>
                 <div style={{backgroundColor:"#989898"}}>
                     <div role="progressbar" style={{width:100*(pokeStat[3]/255)+"%" , backgroundColor:colors[pokemontype1]}} >
                         SpAtk: {pokeStat[3]}
                     </div>
                 </div>
-                <br></br>
+                <br/>
                 <div style={{backgroundColor:"#989898"}}>
                     <div role="progressbar" style={{width:100*(pokeStat[4]/255)+"%" , backgroundColor:colors[pokemontype1]}} >
                         SpDef: {pokeStat[4]}
                     </div>
                 </div>
-                <br></br>
+                <br/>
                 <div style={{backgroundColor:"#989898"}}>
                     <div role="progressbar" style={{width:100*(pokeStat[5]/255)+"%" , backgroundColor:colors[pokemontype1]}} >
                         Spd: {pokeStat[5]}
@@ -198,4 +177,3 @@ function App(){
 }
 
 export default App
-
