@@ -135,9 +135,6 @@ export default class List extends React.Component {
                         Spd: {Math.floor((this.state.speed*255)/100)}
                     </div>
                 </div>
-                
-            
-            
             </div>
         )
 
@@ -147,7 +144,7 @@ export default class List extends React.Component {
 
     return (
         <Popover
-            content={content} trigger="click" placement="bottom" title={<h1>{capitalize(this.state.name)}</h1>} 
+            content={content} trigger="click" placement="bottom" 
         >
             <Card
             bordered

@@ -6,12 +6,14 @@ import List from "./List"
 const pokeData = require('./pokeData.json')
 
 function App(){
-  const [pokemon, setPokemon] = useState("pikachu");
-  const [pokemonData, setPokemonData] = useState([]);
-  const [pokemontype1, setPokemonType] = useState("");
-  const [pokemontypes, setPokemonTypes] = useState("");
-  const [pokemonAB, setPokemonAB] = useState("");
+  const [pokemon, setPokemon] = useState("pikachu")
+  const [pokemonData, setPokemonData] = useState([])
+  const [pokeStat, setPokeStat] = useState([])
+  const [pokemontype1, setPokemonType] = useState("")
+  const [pokemontypes, setPokemonTypes] = useState("")
+  const [pokemonAB, setPokemonAB] = useState("")
   const [Pokedex] = useState(pokeData.results)
+  
   var i = 1
   const imageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
   const colors = {
@@ -61,10 +63,20 @@ function App(){
       }
       else
           ab = response.abilities[0].ability.name
-          setPokemonAB(ab)
+
+        setPokemonAB(ab)
         setPokemonData(response)   
         console.log("Single Pokemon Fetched: ",response)
-    })
+        setPokeStat([ response.stats[0].base_stat,
+                      response.stats[1].base_stat,
+                      response.stats[2].base_stat,
+                      response.stats[3].base_stat,
+                      response.stats[4].base_stat,
+                      response.stats[5].base_stat])
+    
+    
+    
+      })
     } catch (e) {
       console.log(e)
     }
@@ -124,11 +136,45 @@ function App(){
                   <h4>Pokemon Abilities: {pokemonAB.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}</h4>
                   <h4>Pokemon Height : {pokemonData.height * 10} cm // {(10 * pokemonData.height / 30.48).toFixed(2)} ft.</h4>
                   <h4>Pokemon Weight : {pokemonData.weight / 10} kg // {(pokemonData.weight*2.2046 / 10).toFixed(2)}lbs</h4>
+                  <div style={{backgroundColor:"#989898"}}>
+                    <div role="progressbar" style={{width:100*(pokeStat[0]/255)+"%" , backgroundColor:colors[pokemontype1]}} >
+                    HP:{pokeStat[0]}
+                    </div>                
+                </div>
+                <br></br>
+                <div style={{backgroundColor:"#989898"}}>
+                    <div role="progressbar" style={{width:100*(pokeStat[1]/255)+"%" , backgroundColor:colors[pokemontype1]}} >
+                        ATK: {pokeStat[1]}
+                    </div>
+                </div>
+                <br></br>
+                <div style={{backgroundColor:"#989898"}}>
+                    <div role="progressbar" style={{width:100*(pokeStat[2]/255)+"%" , backgroundColor:colors[pokemontype1]}} >
+                        DEF: {pokeStat[2]}
+                    </div>
+                </div>
+                <br></br>
+                <div style={{backgroundColor:"#989898"}}>
+                    <div role="progressbar" style={{width:100*(pokeStat[3]/255)+"%" , backgroundColor:colors[pokemontype1]}} >
+                        SpAtk: {pokeStat[3]}
+                    </div>
+                </div>
+                <br></br>
+                <div style={{backgroundColor:"#989898"}}>
+                    <div role="progressbar" style={{width:100*(pokeStat[4]/255)+"%" , backgroundColor:colors[pokemontype1]}} >
+                        SpDef: {pokeStat[4]}
+                    </div>
+                </div>
+                <br></br>
+                <div style={{backgroundColor:"#989898"}}>
+                    <div role="progressbar" style={{width:100*(pokeStat[5]/255)+"%" , backgroundColor:colors[pokemontype1]}} >
+                        Spd: {pokeStat[5]}
+                    </div>
+                </div>
               </div>
               } 
               trigger="click" 
-              placement="bottom" 
-              title={<h1>{pokemonData.name ? pokemonData.name[0].toUpperCase()+ pokemonData.name.slice(1) : null}</h1>} 
+              placement="bottom"
             >
               <Card
                 style={{width:"250px", textAlign:"center", opacity:0.95, backgroundColor:colors[pokemontype1]}}
