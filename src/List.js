@@ -1,7 +1,8 @@
 import React from 'react'
-import {Card, Popover} from "antd"
+import {Card, Modal} from "antd"
 import 'antd/dist/antd.css'
 import {imageURL, colors} from "./Data"
+
 export default class List extends React.Component {
     constructor(props){
         super(props)
@@ -19,7 +20,8 @@ export default class List extends React.Component {
             defense:0,
             spatk:0,
             spdef:0,
-            speed:0
+            speed:0,
+            setIsModalVisible:false
         }
     }
 
@@ -69,9 +71,48 @@ export default class List extends React.Component {
         })
     }
 
+    showModal = () =>{
+        this.setState({
+            setIsModalVisible:true
+        })
+    }
+    
+    handleOk= () =>{
+        this.setState({
+            setIsModalVisible:false
+        })
+    }
+    
+    handleCancel= () =>{
+        this.setState({
+            setIsModalVisible:false
+        })
+    }
+    
     render(){
-        const content = (
-            <div>
+        function capitalize(str){
+            return str.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
+        }
+
+    return (
+        <div>
+            <Card
+            onClick={this.showModal}
+            bordered
+            hoverable
+            style={{width:"250px", textAlign:"center", opacity:0.95, backgroundColor:colors[this.state.colour]}}
+            cover={<img src={imageURL + this.state.id +".png"} alt="failed to fetch" style={{padding:"10px"}}></img> }
+            key={this.state.id}
+            loading={this.state.loading}
+            >
+                <Card.Meta title={<h3>{capitalize(this.state.name)}</h3>}></Card.Meta>
+            </Card>
+            <Modal 
+                title = {capitalize(this.state.name)} 
+                visible = {this.state.setIsModalVisible}
+                onOk = {this.handleOk}
+                onCancel = {this.handleCancel}
+            >
                 <h4>Pokemon ID: {this.state.id}</h4>
                 <h4>Pokemon Type(s): {capitalize(this.state.type)}</h4>
                 <h4>Pokemon Abilities: {capitalize(this.state.abilities)}</h4>
@@ -112,28 +153,9 @@ export default class List extends React.Component {
                         Spd: {Math.floor((this.state.speed*255)/100)}
                     </div>
                 </div>
-            </div>
-        )
+            </Modal>
+        </div>
 
-        function capitalize(str){
-            return str.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
-        }
-
-    return (
-        <Popover
-            content={content} trigger="click" placement="bottom" 
-        >
-            <Card
-            bordered
-            hoverable
-            style={{width:"250px", textAlign:"center", opacity:0.95, backgroundColor:colors[this.state.colour]}}
-            cover={<img src={imageURL + this.state.id +".png"} alt="failed to fetch" style={{padding:"10px"}}></img> }
-            key={this.state.id}
-            loading={this.state.loading}
-            >
-                <Card.Meta title={<h3>{capitalize(this.state.name)}</h3>}></Card.Meta>
-            </Card>
-        </Popover>
     )
     }
 }
