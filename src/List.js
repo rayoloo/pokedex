@@ -113,6 +113,7 @@ export default class List extends React.Component {
                 onOk = {this.handleOk}
                 onCancel = {this.handleCancel}
             >
+                <img src={imageURL + this.state.id +".png"} alt="failed to fetch" style={{padding:"10px"}}/>
                 <h4>Pokemon ID: {this.state.id}</h4>
                 <h4>Pokemon Type(s): {capitalize(this.state.type)}</h4>
                 <h4>Pokemon Abilities: {capitalize(this.state.abilities)}</h4>
