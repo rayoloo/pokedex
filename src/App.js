@@ -149,6 +149,7 @@ export default function App(){
           onOk={handleOk} 
           onCancel={handleCancel}>
           <div>
+            <img src={imageURL + pokemonData.id +".png"} alt="failed to fetch" style={{padding:"10px"}}/>
             <h4>Pokemon ID: {pokemonData.id}</h4>
             <h4>Pokemon Type(s): {pokemontypes.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}</h4>
             <h4>Pokemon Abilities: {pokemonAB.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}</h4>
