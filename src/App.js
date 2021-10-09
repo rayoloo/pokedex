@@ -72,6 +72,9 @@ export default function App(){
   const dexComponent = Pokedex.map((aPokemon) =>{
     var pid = i
     i++
+    if(i == 898){
+      i = 10001
+    }
     return(
     <div>  
       <Col span={6} >
