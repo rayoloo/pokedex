@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Modal} from "antd"
+import {Card, Modal, Button} from "antd"
 import 'antd/dist/antd.css'
 import {imageURL, colors} from "./Data"
 
