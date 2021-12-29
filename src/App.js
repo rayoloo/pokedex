@@ -145,10 +145,14 @@ export default function App(){
         <Modal
           title ={pokemonData.name ? pokemonData.name[0].toUpperCase()+ pokemonData.name.slice(1) : null}
           visible={isModalVisible}
+          closable='false'
+          maskClosable='true'
+          onCancel={handleCancel}
           footer={[
             <Button key="back" onClick={handleCancel}>
               Close
             </Button>]}>
+          
           <div>
             <img src={imageURL + pokemonData.id +".png"} alt="failed to fetch" style={{padding:"10px"}}/>
             <h4>Pokemon ID: {pokemonData.id}</h4>
