@@ -76,12 +76,7 @@ export default class List extends React.Component {
             setIsModalVisible:true
         })
     }
-    
-    handleOk= () =>{
-        this.setState({
-            setIsModalVisible:false
-        })
-    }
+
     
     handleCancel= () =>{
         this.setState({
@@ -110,8 +105,10 @@ export default class List extends React.Component {
             <Modal 
                 title = {capitalize(this.state.name)} 
                 visible = {this.state.setIsModalVisible}
-                onOk = {this.handleOk}
-                onCancel = {this.handleCancel}
+                footer={[
+            <Button key="back" onClick={this.handleCancel}>
+              Close
+            </Button>]}
             >
                 <img src={imageURL + this.state.id +".png"} alt="failed to fetch" style={{padding:"10px"}}/>
                 <h4>Pokemon ID: {this.state.id}</h4>
