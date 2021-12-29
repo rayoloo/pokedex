@@ -105,6 +105,9 @@ export default class List extends React.Component {
             <Modal 
                 title = {capitalize(this.state.name)} 
                 visible = {this.state.setIsModalVisible}
+                closable='false'
+                maskClosable='true'
+                onCancel={handleCancel}
                 footer={[
             <Button key="back" onClick={this.handleCancel}>
               Close
