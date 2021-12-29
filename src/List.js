@@ -107,7 +107,7 @@ export default class List extends React.Component {
                 visible = {this.state.setIsModalVisible}
                 closable='false'
                 maskClosable='true'
-                onCancel={handleCancel}
+                onCancel={this.handleCancel}
                 footer={[
             <Button key="back" onClick={this.handleCancel}>
               Close
