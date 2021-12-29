@@ -22,7 +22,6 @@ export default function App(){
   const onClose = () => {setVisible(false)}
   
   const showModal = () => {setIsModalVisible(true)}
-  const handleOk = () => {setIsModalVisible(false)}
   const handleCancel = () => {setIsModalVisible(false)}
   
   const getPokemon = async () => {
@@ -145,9 +144,11 @@ export default function App(){
         </Row>
         <Modal
           title ={pokemonData.name ? pokemonData.name[0].toUpperCase()+ pokemonData.name.slice(1) : null}
-          visible={isModalVisible} 
-          onOk={handleOk} 
-          onCancel={handleCancel}>
+          visible={isModalVisible}
+          footer={[
+            <Button key="back" onClick={handleCancel}>
+              Close
+            </Button>]}>
           <div>
             <img src={imageURL + pokemonData.id +".png"} alt="failed to fetch" style={{padding:"10px"}}/>
             <h4>Pokemon ID: {pokemonData.id}</h4>
