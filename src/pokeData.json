@@ -1,5 +1,5 @@
 {
-    "results": [
+  "results": [
     {
       "name": "bulbasaur",
       "url": "https://pokeapi.co/api/v2/pokemon/1/"
@@ -2869,7 +2869,7 @@
       "url": "https://pokeapi.co/api/v2/pokemon/717/"
     },
     {
-      "name": "zygarde",
+      "name": "zygarde-50",
       "url": "https://pokeapi.co/api/v2/pokemon/718/"
     },
     {
@@ -3505,7 +3505,7 @@
       "url": "https://pokeapi.co/api/v2/pokemon/876/"
     },
     {
-      "name": "morpeko",
+      "name": "morpeko-full-belly",
       "url": "https://pokeapi.co/api/v2/pokemon/877/"
     },
     {
@@ -3549,11 +3549,11 @@
       "url": "https://pokeapi.co/api/v2/pokemon/887/"
     },
     {
-      "name": "zacian-hero",
+      "name": "zacian",
       "url": "https://pokeapi.co/api/v2/pokemon/888/"
     },
     {
-      "name": "zamazenta-hero",
+      "name": "zamazenta",
       "url": "https://pokeapi.co/api/v2/pokemon/889/"
     },
     {
@@ -3591,6 +3591,34 @@
     {
       "name": "calyrex",
       "url": "https://pokeapi.co/api/v2/pokemon/898/"
+    },
+    {
+      "name": "wyrdeer",
+      "url": "https://pokeapi.co/api/v2/pokemon/899/"
+    },
+    {
+      "name": "kleavor",
+      "url": "https://pokeapi.co/api/v2/pokemon/900/"
+    },
+    {
+      "name": "ursaluna",
+      "url": "https://pokeapi.co/api/v2/pokemon/901/"
+    },
+    {
+      "name": "basculegion-male",
+      "url": "https://pokeapi.co/api/v2/pokemon/902/"
+    },
+    {
+      "name": "sneasler",
+      "url": "https://pokeapi.co/api/v2/pokemon/903/"
+    },
+    {
+      "name": "overqwil",
+      "url": "https://pokeapi.co/api/v2/pokemon/904/"
+    },
+    {
+      "name": "enamorus-incarnate",
+      "url": "https://pokeapi.co/api/v2/pokemon/905/"
     }
   ]
 }
